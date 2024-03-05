@@ -4,12 +4,12 @@ const http = require("http"); //create http server
 
 const server = http.createServer((req, res) => {
   if (req.url === "/") {
-    console.log("Welcome to my pg!, I am learning Node");
+    res.end("Welcome to my pg!, I am learning Node");
     return;
   }
 
   if (req.url === "/about") {
-    console.log("About pg!");
+    res.end("About pg!");
     return;
   }
 
