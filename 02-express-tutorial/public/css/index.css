@@ -1,0 +1,14 @@
+* {
+  font-style: oblique;
+}
+h1 {
+  color: teal;
+}
+button {
+  color: white;
+  background-color: teal;
+  border-color: none;
+  padding: 3px;
+  margin: 3px;
+  padding-right: 5px;
+}
