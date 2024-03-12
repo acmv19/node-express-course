@@ -1,0 +1,12 @@
+* {
+  background-color: aqua;
+  font-style: oblique;
+}
+h1 {
+  color: yellow;
+}
+body {
+  margin: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}

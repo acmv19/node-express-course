@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>week3 bonus assigment</title>
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body style="background-color: rgb(246, 252, 239)">
+    <h1>&nbsp;My name is Anamaria Maldonado</h1>
+    <section id="cursos">
+      <!-- Lista de cursos se insertará aquí -->
+      <h1>CURSOS</h1>
+      <ul id="cursos-list">
+        <!-- Lista de cursos se insertará aquí -->
+      </ul>
+    </section>
+    <script>
+      fetch("/api/cursos") // Hacer una solicitud GET a tu servidor Express
+        .then((response) => response.json()) // Convertir la respuesta a JSON
+        .then((cursos) => {
+          const cursosList = document.getElementById("cursos-list");
+          // Iterar sobre los cursos y agregar cada uno como un elemento de lista
+          cursos.forEach((curso) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${curso.nombre} - ${curso.lenguaje} - Nivel ${curso.nivel}`;
+            cursosList.appendChild(listItem);
+          });
+        })
+        .catch((error) => console.error("Error fetching cursos:", error));
+    </script>
+  </body>
+</html>

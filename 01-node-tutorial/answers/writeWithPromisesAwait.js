@@ -35,7 +35,7 @@ const reader = async () => {
 //ambas son async y no sabemos en que orden apareceran OJO
 
 const readWrite = async () => {
-  writer();
-  reader();
+  await writer();
+  await reader();
 };
 readWrite(); //calling func.
