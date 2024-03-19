@@ -3,17 +3,47 @@ console.log("Express Tutorial");
 //                          Express
 
 const Express = require("express");
+const cookieParser = require("cookie-parser");
 const app = Express();
 const { products } = require("./data");
+const { people } = require("./data");
 
-app.use(Express.static("./public"));
+const logger = require("./logger"); //week 3
+const peopleRouter = require("./routes/people");
+const authRouter = require("./routes/auth");
+const auth = require("./auth");
 
-app.get("/api/v1/test", (req, res) => {
-  //url, callbackfunction
-  console.log("user hit the resource");
-  //res.send("home pg");
-  res.json({ message: "It worked!" });
+//app.use(Express.static("./public"));
+app.use(Express.static("./methods-public"));
+
+app.use(Express.urlencoded({ extended: false })); //parse form data
+app.use(Express.json()); //parse json
+
+app.use(cookieParser());
+
+app.use("/api/vi/people", peopleRouter);
+app.use("/", authRouter); //bonus
+
+app.use("/api", logger); //para todos los routers. middleware func
+
+app.post("/login", (req, res) => {
+  const { name } = req.body; // Extraer nombre del cuerpo de la solicitud
+  if (name) {
+    return res.status(200).send(`welcome ${name}`);
+  }
+
+  res.status(400).json({ success: false, message: "Please provide a name" }); //si no se ingresa un nombre
 });
+
+app.get(
+  "/api/v1/test",
+  /*logger,*/ (req, res) => {
+    //url, callbackfunction
+    console.log("user hit the resource");
+    //res.send("home pg");
+    res.json({ message: "It worked!" });
+  }
+);
 
 app.get("/api/v1/products", (req, res) => {
   res.json(products);
@@ -69,6 +99,13 @@ app.get("/api/v1/query", (req, res) => {
 app.all("*", (req, res) => {
   res.status(404).send("pg not found!");
 });
+
+/*app.put("/api/people/:id", (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  console.log(id, name);
+  res.send("hello");
+});*/
 
 app.listen(3000, () => {
   console.log("server is lisyening port 3000!");
