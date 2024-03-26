@@ -21,6 +21,7 @@ app.use(Express.json()); //parse json
 
 app.use(cookieParser());
 
+app.use(auth);
 app.use("/api/vi/people", peopleRouter);
 app.use("/", authRouter); //bonus
 
