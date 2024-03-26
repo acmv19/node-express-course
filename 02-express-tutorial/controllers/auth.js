@@ -4,7 +4,7 @@ const logOn = (req, res) => {
   const { name } = req.body;
   if (name) {
     res
-      .cooke("name", req.body.name)
+      .cookie("name", req.body.name)
       .status(201)
       .json({ message: `hi ${name} :D ` });
   } else {
