@@ -1,0 +1,16 @@
+1. In this lesson, you created a middleware function called asyncWrapper. Why?
+
+With asynchronous operations, using try-catch blocks is handy, but it tends to get repetitive.
+So, a slicker fix is setting up a middleware function to wrap around the controllers. 
+This way, we dodge the redundancy and keep things neat and tidy.
+
+2.Suppose that you want to make sure that both a status code and an error message are sent back to the user when they request the URL for a task that does not exist. Assume that you’ve created a CustomAPIError class and an error handler that references that class. Complete the code:
+const getTask = asyncWrapper(async (req, res, next) => {  
+  const { id: taskID } = req.params;  
+  const task = await Task.findOne({ _id: taskID });  
+  if (!task) {  
+    // your code here  
+    return next(createCustomError(`not find task with the id:${taskID} :C`, 404));
+  }  
+  res.status(200).json({ task });  
+}); 
