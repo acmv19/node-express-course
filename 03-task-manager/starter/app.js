@@ -8,7 +8,11 @@ const connectDB = require("./db/connect");
 
 require("dotenv").config();
 
+const notFound = require("./middleware/not-found");
+const errorHandlerMiddleware = require("./middleware/error-handler");
+
 //middleware
+app.use(Express.static("./public"));
 app.use(Express.json());
 
 //routes
@@ -18,7 +22,11 @@ app.get("/hello", (req, res) => {
 
 app.use("/api/v1/task", task);
 
-const port = 3002;
+app.use(notFound);
+app.use(errorHandlerMiddleware);
+
+//const port = 3002;
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
